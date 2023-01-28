@@ -37,12 +37,15 @@ func (b *Block) Print() {
 	for _, transaction := range b.transactions {
 		transaction.Print()
 	}
-
 }
 
 func (b *Block) Hash() [32]byte {
 	m, _ := json.Marshal(b)
 	return sha256.Sum256([]byte(m))
+}
+
+func (b *Block) GetTransactions() []*Transaction.Transaction {
+	return b.transactions
 }
 
 func NewBlock(nonce int, previousHash [32]byte, transactions []*Transaction.Transaction) *Block {
